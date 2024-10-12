@@ -1,6 +1,9 @@
 package com.example.socialmedia.dto;
 
 import com.example.socialmedia.entity.UserEntity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.Value;
 
 import java.io.Serializable;
@@ -8,12 +11,15 @@ import java.io.Serializable;
 /**
  * DTO for {@link UserEntity}
  */
-@Value
+
+@AllArgsConstructor
+@Getter
 public class UserDto implements Serializable {
-    String firstName;
-    String lastName;
-    String userName;
-    String email;
-    String password;
-    String phoneNumber;
+    private final Long id;
+    private final String firstName;
+    private final String lastName;
+    private final String userName;
+    private final String email;
+    private final String password;
+    private final int phoneNumber;
 }

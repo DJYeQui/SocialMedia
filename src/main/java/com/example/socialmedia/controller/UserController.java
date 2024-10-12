@@ -4,15 +4,14 @@ import com.example.socialmedia.constants.ApiConstants;
 import com.example.socialmedia.dto.UserDto;
 import com.example.socialmedia.entity.UserEntity;
 import com.example.socialmedia.service.UserService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(ApiConstants.USER_API)
@@ -21,11 +20,18 @@ public class UserController {
     private final UserService userService;
 
 
-
     @PostMapping("/createUser")
-    @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<UserEntity> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserDto userDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("Invalid user form " + bindingResult.getAllErrors());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return userService.createUser(userDto);
+    }
+
+    @GetMapping("/usersBy{name}")
+    public ResponseEntity<List<UserEntity>> getUsersById(@PathVariable String name) {
+        return userService.getAllUsersById(name);
     }
 
 }

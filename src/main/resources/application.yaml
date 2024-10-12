@@ -2,7 +2,7 @@ spring:
   application:
   name: SocialMedia
   datasource:
-    url: jdbc:postgresql://localhost:5432/enterence
+    url: jdbc:postgresql://localhost:5432/socialmedia
     username: postgres
     password: postgres
   jpa:

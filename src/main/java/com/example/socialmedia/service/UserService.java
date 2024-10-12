@@ -8,14 +8,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public ResponseEntity<UserEntity> createUser(UserDto userDto) {
+    public ResponseEntity<Object> createUser(UserDto userDto) {
         UserEntity userEntity = userRepository.save(userMapper.toEntity(userDto));
         return ResponseEntity.ok(userEntity);
+    }
+
+    public ResponseEntity<List<UserEntity>> getAllUsersById(String name) {
+        List<UserEntity> userEntities = userRepository.findUserEntitiesByFirstName(name);
+        return ResponseEntity.ok(userEntities);
     }
 }
