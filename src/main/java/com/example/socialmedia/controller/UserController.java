@@ -20,7 +20,7 @@ public class UserController {
     private final UserService userService;
 
 
-    @PostMapping("/createUser")
+    @PostMapping("/register")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserDto userDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.out.println("Invalid user form " + bindingResult.getAllErrors());
@@ -29,9 +29,15 @@ public class UserController {
         return userService.createUser(userDto);
     }
 
-    @GetMapping("/usersBy{name}")
+    @GetMapping("/searchByName{name}")
     public ResponseEntity<List<UserEntity>> getUsersByName(@PathVariable String name) {
         return userService.getAllUsersByName(name);
     }
+
+    @GetMapping("/login")
+    public ResponseEntity<UserEntity> login(@RequestParam String username, @RequestParam String password) {
+        return userService.checkForLogin(username,password);
+    }
+
 
 }

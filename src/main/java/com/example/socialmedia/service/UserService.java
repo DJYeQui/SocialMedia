@@ -5,6 +5,7 @@ import com.example.socialmedia.entity.UserEntity;
 import com.example.socialmedia.mapper.UserMapper;
 import com.example.socialmedia.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,16 @@ public class UserService {
     public ResponseEntity<List<UserEntity>> getAllUsersByName(String name) {
         List<UserEntity> userEntities = userRepository.findUserEntitiesByFirstName(name);
         return ResponseEntity.ok(userEntities);
+    }
+
+    public ResponseEntity<UserEntity> checkForLogin(String username, String password) {
+        try {
+            UserEntity userEntity = userRepository.findByUserNameAndPassword(username,password);
+            return ResponseEntity.ok(userEntity);
+        }
+        catch (Exception e){
+            System.out.println("WE COULD NOT FİND USER WİTH THAT INFORMATİON"+e.getMessage());
+            return ResponseEntity.badRequest().build();
+        }
     }
 }
