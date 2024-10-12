@@ -33,7 +33,7 @@ public class UserService {
             return ResponseEntity.ok(userEntity);
         }
         catch (Exception e){
-            System.out.println("WE COULD NOT FİND USER WİTH THAT INFORMATİON"+e.getMessage());
+            System.out.println("WE COULD NOT FİND USER WİTH THAT INFORMATION"+e.getMessage());
             return ResponseEntity.badRequest().build();
         }
     }
