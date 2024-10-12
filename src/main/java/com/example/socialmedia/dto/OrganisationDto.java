@@ -11,11 +11,11 @@ import java.util.Set;
  */
 @Value
 public class OrganisationDto implements Serializable {
-    String organisationName;
-    String organzationDescription;
-    String organisationDate;
-    String organisationLocation;
-    String organisationType;
-    String organisationStatus;
+    String name;
+    String description;
+    String date;
+    String location;
+    String type; // for labeling later
+    String status;
     Set<UserEntity> userEntities;
 }

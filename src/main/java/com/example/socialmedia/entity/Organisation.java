@@ -17,12 +17,13 @@ public class Organisation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-    private String organisationName;
-    private String organzationDescription;
-    private String organisationDate;
-    private String organisationLocation;
-    private String organisationType; // for labeling later
-    private String organisationStatus;
+    private String name;
+    private String description;
+    private String date;
+    private String location;
+    private String type; // for labeling later
+    private String status;
+    @Column(unique = true)
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "organisation_userEntities",
