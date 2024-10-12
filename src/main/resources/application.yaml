@@ -1,0 +1,16 @@
+spring:
+  application:
+  name: SocialMedia
+  datasource:
+    url: jdbc:postgresql://localhost:5432/enterence
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+    show-sql: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
