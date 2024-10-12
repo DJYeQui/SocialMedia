@@ -10,7 +10,6 @@ spring:
       ddl-auto: create-drop
 
     show-sql: true
-
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
