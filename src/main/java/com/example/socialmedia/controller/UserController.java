@@ -30,8 +30,8 @@ public class UserController {
     }
 
     @GetMapping("/usersBy{name}")
-    public ResponseEntity<List<UserEntity>> getUsersById(@PathVariable String name) {
-        return userService.getAllUsersById(name);
+    public ResponseEntity<List<UserEntity>> getUsersByName(@PathVariable String name) {
+        return userService.getAllUsersByName(name);
     }
 
 }

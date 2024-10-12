@@ -21,7 +21,7 @@ public class UserService {
         return ResponseEntity.ok(userEntity);
     }
 
-    public ResponseEntity<List<UserEntity>> getAllUsersById(String name) {
+    public ResponseEntity<List<UserEntity>> getAllUsersByName(String name) {
         List<UserEntity> userEntities = userRepository.findUserEntitiesByFirstName(name);
         return ResponseEntity.ok(userEntities);
     }
