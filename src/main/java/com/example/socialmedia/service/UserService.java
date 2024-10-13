@@ -5,7 +5,6 @@ import com.example.socialmedia.entity.UserEntity;
 import com.example.socialmedia.mapper.UserMapper;
 import com.example.socialmedia.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +15,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final JwtService jwtService;
 
     public ResponseEntity<Object> createUser(UserDto userDto) {
         UserEntity userEntity = userRepository.save(userMapper.toEntity(userDto));
@@ -27,14 +27,14 @@ public class UserService {
         return ResponseEntity.ok(userEntities);
     }
 
-    public ResponseEntity<UserEntity> checkForLogin(String username, String password) {
-        try {
-            UserEntity userEntity = userRepository.findByUserNameAndPassword(username,password);
-            return ResponseEntity.ok(userEntity);
-        }
-        catch (Exception e){
-            System.out.println("WE COULD NOT FİND USER WİTH THAT INFORMATION"+e.getMessage());
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<Object> checkForLogin(String username, String password) {
+
+        UserEntity userEntity = userRepository.findByUserNameAndPassword(username, password);
+        String token = jwtService.generateToken(userEntity);
+        System.out.println(jwtService.extractId(token));
+        System.out.println(jwtService.validateToken(token,String.valueOf(userEntity.getId())));
+        return ResponseEntity.ok(token);
     }
+
 }
+

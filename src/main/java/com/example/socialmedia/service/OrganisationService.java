@@ -5,7 +5,6 @@ import com.example.socialmedia.entity.Organisation;
 import com.example.socialmedia.entity.UserEntity;
 import com.example.socialmedia.mapper.OrganisationMapper;
 import com.example.socialmedia.repository.OrganisationRepository;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class OrganisationService {
             System.out.println("add participant to organisation");
             organisation.getUserEntities().add(userEntity);
             return ResponseEntity.ok().body(organisationMapper.toDto(organisationRepository.save(organisation)));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.accepted().build();
         }

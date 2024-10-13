@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public ResponseEntity<UserEntity> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<Object> login(@RequestParam String username, @RequestParam String password) {
         return userService.checkForLogin(username,password);
     }
 
