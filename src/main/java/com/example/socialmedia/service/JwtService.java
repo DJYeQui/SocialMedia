@@ -16,12 +16,16 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtService {
     private final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256); // Use a strong secret key
-    private final long EXPIRATION_TIME = 86400000; // 1 day in milliseconds
+    private final long EXPIRATION_TIME = 86400000; // 1 day in milliseconds -> 5dk
+    //refresh token(30dk geçerli) access token yenileme
+    // Https kullanılmalı SSL sertifika üretimi nasıl yapılır ?
+    // keycloak tool -> ilk seçenek
+    // rhbk
 
     // Generate token
     public String generateToken(UserEntity userEntity) {
-        JwtBuilder builder = Jwts.builder()
-                .setSubject(String.valueOf(userEntity.getId()))
+        JwtBuilder builder = Jwts.builder() //.setClaims() rolleri ekleemke için
+                .setSubject(userEntity.getUserName())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(SECRET_KEY);
@@ -30,9 +34,9 @@ public class JwtService {
     }
 
     // Validate token
-    public boolean validateToken(String token, String username) {
+    public boolean validateToken(String token, UserEntity userEntity) {
         final String tokenUsername = extractId(token);
-        return (username.equals(tokenUsername) && !isTokenExpired(token));
+        return (userEntity.getUserName().equals(tokenUsername) && !isTokenExpired(token));
     }
 
     // Extract username

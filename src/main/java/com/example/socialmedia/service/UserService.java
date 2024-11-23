@@ -9,6 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+// api security
+// reverse proksy (spring cloud gateway)
+// material UI library
+// low code material UI open source tool UI
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +36,6 @@ public class UserService {
         UserEntity userEntity = userRepository.findByUserNameAndPassword(username, password);
         String token = jwtService.generateToken(userEntity);
         System.out.println(jwtService.extractId(token));
-        System.out.println(jwtService.validateToken(token,String.valueOf(userEntity.getId())));
         return ResponseEntity.ok(token);
     }
 

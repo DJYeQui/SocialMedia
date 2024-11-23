@@ -29,7 +29,7 @@ public class UserController {
         return userService.createUser(userDto);
     }
 
-    @GetMapping("/searchByName{name}")
+    @GetMapping("/searchByName/{name}")
     public ResponseEntity<List<UserEntity>> getUsersByName(@PathVariable String name) {
         return userService.getAllUsersByName(name);
     }
