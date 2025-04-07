@@ -35,7 +35,6 @@ public class UserService {
 
         UserEntity userEntity = userRepository.findByUserNameAndPassword(username, password);
         String token = jwtService.generateToken(userEntity);
-        System.out.println(jwtService.extractId(token));
         return ResponseEntity.ok(token);
     }
 
